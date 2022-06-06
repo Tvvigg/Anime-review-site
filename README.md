@@ -1,5 +1,7 @@
 # superhero-fight-site
 
+![Image](Schema.png "Schema")
+
 https://superheroapi.com/index.html
 
 Info on blueprint
