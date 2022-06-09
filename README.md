@@ -1,6 +1,6 @@
 # superhero-fight-site
 
-![Image](Schema.png "Schema")
+![Image](Schema.jpeg "Schema")
 
 https://superheroapi.com/index.html
 
