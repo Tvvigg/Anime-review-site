@@ -41,11 +41,9 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        email = form.email.data
+        name = form.name.data
 
-        user = User.register(username, password, first_name, last_name, email)
+        user = User.register(username, password, name)
 
         db.session.commit()
         session['username'] = user.username
@@ -86,3 +84,26 @@ def logout():
 
     session.pop("username")
     return redirect("/login")
+
+@app.route("/user")
+def userPage():
+  """Go to users page"""
+  return render_template("/userpage.html")
+
+
+@app.route("/heros")
+def heros():
+  """Go to users page"""
+  return render_template("/heros.html")
+
+
+@app.route("/teams")
+def teams():
+  """Go to users page"""
+  return render_template("/teams.html")
+
+
+@app.route("/compare")
+def compare():
+  """Go to users page"""
+  return render_template("/compare.html")

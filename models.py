@@ -27,7 +27,7 @@ class User(db.Model):
     )
     password = db.Column(db.Text, nullable=False)
     name = db.Column(db.String(30), nullable=False)
-    image = db.Comumn(db.Text, nullable=True)
+    image = db.Column(db.Text, nullable=True)
     favoritesList = db.relationship("Favorites", backref="User")
     teamList = db.relationship("Team", secondary="user_team", backref="user")
 
@@ -62,7 +62,7 @@ class User(db.Model):
         else:
             return False
 
-class Favorites(db.model):
+class Favorites(db.Model):
   """User Favorites"""
 
   __tablename__ = "favorites"
@@ -71,7 +71,7 @@ class Favorites(db.model):
   user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
   character_id = db.Column(db.Integer, nullable=False, unique=True)
 
-class Team(db.model):
+class Team(db.Model):
   """User Favorites"""
 
   __tablename__ = "teams"
@@ -80,7 +80,7 @@ class Team(db.model):
   character_id = db.Column(db.Integer, nullable=False, unique=True)
   userList = db.relationship("User", secondary="user_team", backref="team")
 
-class UserTeam(db.model):
+class UserTeam(db.Model):
   """Join of User and Team"""
   id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
   user_id = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
