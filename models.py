@@ -26,15 +26,14 @@ class User(db.Model):
         primary_key=True,
     )
     password = db.Column(db.Text, nullable=False)
-    name = db.Column(db.String(30), nullable=False)
-    image = db.Column(db.Text, nullable=True)
+    
     favoritesList = db.relationship("Favorites", backref="User")
     reviews = db.relationship("Reviews", backref="User")
 
     # start of convenience class methods
 
     @classmethod
-    def register(cls, username, password, image):
+    def register(cls, username, password):
         """Register a user, hashing their password."""
 
         hashed = bcrypt.generate_password_hash(password)
@@ -42,7 +41,6 @@ class User(db.Model):
         user = cls(
             username=username,
             password=hashed_utf8,
-            image=image
         )
 
         db.session.add(user)

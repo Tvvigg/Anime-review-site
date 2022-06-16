@@ -31,9 +31,7 @@ class RegisterForm(FlaskForm):
         "Password",
         validators=[InputRequired(), Length(min=6, max=55)],
     )
-    image = StringField(
-        "Image"
-    )
+    
 
 class ReviewForm(FlaskForm):
     """Review for Anime form."""

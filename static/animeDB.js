@@ -1,4 +1,5 @@
 "use strict";
+
 const $showList = $("#shows-list");
 
 const $searchForm = $("#search-form");
@@ -7,18 +8,21 @@ const api = "https://kitsu.io/api/edge/anime?filter[text]=";
 
 async function getShowsByTerm(term) {
   //gets result object from api
-  const response = await axios.get(`${api}${term}`);
+  const response = await axios.get(
+    `https://kitsu.io/api/edge/anime?filter[text]=${term}`
+  );
+  console.log(response);
 
   //puts results into a usable object
-  return response.data.map((result) => {
-    const show = result.show;
-    return {
-      id: show.id,
-      titles: show.titles,
-      synopsis: show.synopsis,
-      image: show.coverImage ? show.coverImage.original : MISSING_IMAGE_URL,
-    };
+  let anime = response.data.data.map((item) => {
+    const id = item.id;
+    const title = item.attributes.canonicalTitle;
+    const description = item.attributes.description;
+    const image = item.attributes.posterImage.original;
+    const rating = item.attributes.ageRating;
   });
+  console.log(anime);
+  return anime;
 }
 
 /** Given list of shows, create markup for each and to DOM */

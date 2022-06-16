@@ -21,6 +21,8 @@ toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
+db.create_all()
+
 
 @app.route("/")
 def homepage():
@@ -41,9 +43,9 @@ def register():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        name = form.name.data
+        
 
-        user = User.register(username, password, name)
+        user = User.register(username, password)
 
         db.session.commit()
         session['username'] = user.username
