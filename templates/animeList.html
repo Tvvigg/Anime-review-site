@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %} Animes List {% endblock %} {% block
+content %}
+<div class="container">
+  <h1>Anime List</h1>
+
+  <form class="form-inline" id="search-form">
+    <input class="form-control" id="search-query" value="bletchley" />
+    <button class="btn btn-primary" type="submit">Go!</button>
+  </form>
+
+  <div class="row mt-3" id="shows-list"></div>
+
+  {% endblock %}
+</div>

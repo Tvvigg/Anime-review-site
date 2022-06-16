@@ -29,7 +29,7 @@ class User(db.Model):
     name = db.Column(db.String(30), nullable=False)
     image = db.Column(db.Text, nullable=True)
     favoritesList = db.relationship("Favorites", backref="User")
-    teamList = db.relationship("Team", secondary="user_team", backref="user")
+    reviews = db.relationship("Reviews", backref="User")
 
     # start of convenience class methods
 
@@ -63,28 +63,32 @@ class User(db.Model):
             return False
 
 class Favorites(db.Model):
-  """User Favorites"""
+    """User Favorites"""
 
-  __tablename__ = "favorites"
+    __tablename__ = "favorites"
 
-  id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-  user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
-  character_id = db.Column(db.Integer, nullable=False, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
+    anime_id = db.Column(db.Integer, db.ForeignKey("anime.id"), nullable=False)
 
-class Team(db.Model):
-  """User Favorites"""
+class Reviews(db.Model):
+    """Reviews"""
 
-  __tablename__ = "teams"
+    __tablename__ = "reviews"
 
-  id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-  character_id = db.Column(db.Integer, nullable=False, unique=True)
-  userList = db.relationship("User", secondary="user_team", backref="team")
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
+    anime_id = db.Column(db.Integer, db.ForeignKey("anime.id"), nullable=False)
+    comments = db.Column(db.String, nullable=True)
+    rating = db.Column(db.Integer, nullable=False)
 
-class UserTeam(db.Model):
-  """Join of User and Team"""
-  id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-  user_id = db.Column(db.String, db.ForeignKey('users.username'), nullable=False)
-  team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable=False)
+class Anime(db.Model):
+    """Anime List"""
+    __tablename__ = "anime"
+
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
+    anime_DB_id = db.Column(db.Integer, nullable=False, unique=True)
 
 
 

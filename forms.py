@@ -1,6 +1,6 @@
 """Forms for flask-feedback."""
 
-from wtforms import StringField, PasswordField, SelectField
+from wtforms import StringField, PasswordField, SelectField, IntegerField
 from wtforms.validators import InputRequired, Length, NumberRange, Email, Optional
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
@@ -35,16 +35,12 @@ class RegisterForm(FlaskForm):
         "Image"
     )
 
-BaseModelForm = model_form_factory(FlaskForm)
-
-class ModelForm(BaseModelForm):
-    @classmethod
-    def get_session(self):
-        return db.session
-
-class TeamForm(ModelForm):
-  """Form to add a team"""
-
-  class Meta:
-    model = Team
+class ReviewForm(FlaskForm):
+    """Review for Anime form."""
+    
+    rating = IntegerField(
+        "Rating",
+        validator={InputRequired(), Length(min=1, max=5)}
+    )
+    comment = StringField("Comments:")
 

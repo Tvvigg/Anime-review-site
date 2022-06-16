@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, ReviewForm
 from models import db, connect_db, User
 from secret import secret_key
 
@@ -91,19 +91,19 @@ def userPage():
   return render_template("/userpage.html")
 
 
-@app.route("/heros")
-def heros():
+@app.route("/anime")
+def anime():
   """Go to users page"""
-  return render_template("/heros.html")
+  return render_template("/anime.html")
 
 
-@app.route("/teams")
-def teams():
+@app.route("/animeList")
+def animeList():
   """Go to users page"""
-  return render_template("/teams.html")
+  return render_template("/animeList.html")
 
 
-@app.route("/compare")
-def compare():
+@app.route("/reviews")
+def reviews():
   """Go to users page"""
-  return render_template("/compare.html")
+  return render_template("/reviews.html")
