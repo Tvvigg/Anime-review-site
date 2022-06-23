@@ -11,45 +11,41 @@ async function getShowsByTerm(term) {
   const response = await axios.get(
     `https://kitsu.io/api/edge/anime?filter[text]=${term}`
   );
-  console.log(response);
-
-  //puts results into a usable object
-  let anime = response.data.data.map((item) => {
-    const id = item.id;
-    const title = item.attributes.canonicalTitle;
-    const description = item.attributes.description;
-    const image = item.attributes.posterImage.original;
-    const rating = item.attributes.ageRating;
-  });
-  console.log(anime);
-  return anime;
+  $showList.empty();
+  for (let anime of response.data.data) {
+    populateShows(anime);
+  }
 }
 
+async function getShowByID(term) {
+  const response = await axios.get();
+}
 /** Given list of shows, create markup for each and to DOM */
 
 function populateShows(shows) {
   // const $showsList = $("#shows-list");
-  $showList.empty();
-
-  for (let show of shows) {
-    const $show = $(
-      `<div data-show-id="${show.id}" class="Show col-md-12 col-lg-6 mb-4">
+  const $show = $(
+    `<div id="animeID" data-show-id="${shows.id}" class="Show col-md-12 col-lg-6 mb-4">
          <div class="media">
-         <img src="${show.image}" alt="${show.titles}">
+         <img src="${shows.attributes.coverImage.tiny}" alt="${shows.attributes.canonicalTitle}">
           <div class="media-body">
-             <h5 class="text-primary">${show.titles}</h5>
-             <div><small>${show.synopsis}</small></div>
-             <button class="btn btn-outline-light btn-sm Show-getEpisodes">
-               Episodes
-             </button>
-           </div>
+             <h5 class="text-primary">${shows.attributes.canonicalTitle}</h5>
+             <div><small>${shows.attributes.synopsis}</small></div>
+             <form method="POST" action="/animeList">
+             <input type="hidden" name="animeId" value="${shows.id}" />
+             <button type="submit" name="animeName" value="${shows.attributes.canonicalTitle}">Review Anime</button>
+             </form>
+          </div>
          </div>  
        </div>
       `
-    );
+  );
 
-    $showList.append($show);
-  }
+  $showList.append($show);
+}
+
+function sendID() {
+  let animeID = getElementById("animeID".value);
 }
 
 /** Handle search form submission: get shows from API and display.
@@ -61,8 +57,6 @@ async function searchForShowAndDisplay() {
   const shows = await getShowsByTerm(term);
 
   $("#episodes-area").hide();
-
-  populateShows(shows);
 }
 
 $searchForm.on("submit", async function (evt) {

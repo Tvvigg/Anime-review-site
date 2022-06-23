@@ -67,25 +67,23 @@ class Favorites(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
-    anime_id = db.Column(db.Integer, db.ForeignKey("anime.id"), nullable=False)
+    anime_id = db.Column(db.String, db.ForeignKey("anime.name"), nullable=False)
 
 class Reviews(db.Model):
     """Reviews"""
 
     __tablename__ = "reviews"
 
-    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False, autoincrement=True)
     user = db.Column(db.String, db.ForeignKey("users.username"), nullable=False)
-    anime_id = db.Column(db.Integer, db.ForeignKey("anime.id"), nullable=False)
+    anime_id = db.Column(db.String, db.ForeignKey("anime.name"), nullable=False)
     comments = db.Column(db.String, nullable=True)
     rating = db.Column(db.Integer, nullable=False)
 
 class Anime(db.Model):
     """Anime List"""
     __tablename__ = "anime"
-
-    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-    name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, primary_key=True, nullable=False, unique=True)
     anime_DB_id = db.Column(db.Integer, nullable=False, unique=True)
 
 

@@ -33,10 +33,7 @@
     <div class="container mt-5">
       {% for msg in get_flashed_messages() %}
       <div class="alert alert-info">{{ msg }}</div>
-      {% endfor %} 
-      {% if 'username' in session %}
-      <h2>Welcome back!</h2>
-      {% endif %}
+      {% endfor %}
       {% block content %}
       <!-- put the content here -->
       

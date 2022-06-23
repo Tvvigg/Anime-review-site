@@ -1,2 +1,22 @@
-{% extends 'base.html' %} {% block title %} Compare {% endblock %} {% block
-content %} {% endblock %}
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
+
+<h1>New Review for {{animeName}}</h1>
+
+<form method="POST">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
+  'hidden'%}
+
+  <div class="form-group">
+    {{ field.label }} {{ field(class="form-control") }}
+
+    <span>
+      {% if field.errors %} {% for error in field.errors %}
+      <b class="text-danger">{{ error }}</b>
+      {% endfor %} {% endif %}
+    </span>
+  </div>
+
+  {% endfor %}
+  <button class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

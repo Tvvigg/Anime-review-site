@@ -1,6 +1,7 @@
 """Forms for flask-feedback."""
 
-from wtforms import StringField, PasswordField, SelectField, IntegerField
+from tokenize import String
+from wtforms import StringField, PasswordField, SelectField, IntegerField, RadioField
 from wtforms.validators import InputRequired, Length, NumberRange, Email, Optional
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
@@ -36,9 +37,8 @@ class RegisterForm(FlaskForm):
 class ReviewForm(FlaskForm):
     """Review for Anime form."""
     
-    rating = IntegerField(
-        "Rating",
-        validator={InputRequired(), Length(min=1, max=5)}
+    rating = RadioField("rating", choices=[('1', ""), ('2', ""), ('3',""), ('4', ""), ('5', "")], default = '1'
     )
-    comment = StringField("Comments:")
+    comments = StringField("Comments:")
+
 
