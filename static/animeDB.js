@@ -4,6 +4,8 @@ const $showList = $("#shows-list");
 
 const $searchForm = $("#search-form");
 
+const $animeImage = $("#anime-image");
+
 const api = "https://kitsu.io/api/edge/anime?filter[text]=";
 
 async function getShowsByTerm(term) {
@@ -48,9 +50,7 @@ function sendID() {
   let animeID = getElementById("animeID".value);
 }
 
-/** Handle search form submission: get shows from API and display.
- *    Hide episodes area (that only gets shown if they ask for episodes)
- */
+/** Handle search form submission: get shows from API and display. **/
 
 async function searchForShowAndDisplay() {
   const term = $("#search-query").val();

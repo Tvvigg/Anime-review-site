@@ -4,7 +4,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect, session, g, abort, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import exists
+from sqlalchemy import exists, and_
 
 from forms import RegisterForm, LoginForm, ReviewForm
 from models import db, connect_db, User, Anime, Reviews
@@ -109,14 +109,12 @@ def animeList():
     anime = Anime(name = animeName[0], anime_DB_id = animeId[0])
     
     if "username" in session:
-        exists = db.session.query(db.exists().where(Anime.name == animeName[0]))
+        exist = db.session.query(exists().where(Anime.name == animeName[0]))
     
-        if exists:
-            flash("You have already viewed this anime!")
-            return redirect("/user")
-        
-        db.session.add(anime)
-        db.session.commit()
+        if not exist:
+            db.session.add(anime)
+            db.session.commit()
+
         return redirect(url_for("reviews", animeName= animeName[0]))
 
 
