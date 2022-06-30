@@ -1,5 +1,6 @@
 .rate-area {
-  float: left;
+  float: right;
+  padding-right: 35%;
   border-style: none;
 }
 
@@ -11,7 +12,6 @@
 
 .rate-area:not(:checked) > label {
   float: right;
-  width: 0.8em;
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
@@ -38,4 +38,12 @@
 .rate-area > input:checked ~ label:hover ~ label,
 .rate-area > label:hover ~ input:checked ~ label {
   color: teal;
+}
+
+#comments {
+  display: block;
+  position: relative;
+  height: 10em;
+  width: 45%;
+  text-align: left;
 }

@@ -29,7 +29,7 @@ async function getShowByID() {
   );
   let img = response.data.data.attributes.coverImage;
   const animeImg = $(`<img src="${img.tiny}" alt="image not found"/>`);
-  $animeImage.append(animeImg);
+  $animeImage.prepend(animeImg);
 }
 
 /** Given list of shows, create markup for each and to DOM */
@@ -68,7 +68,8 @@ $searchForm.on("submit", async function (evt) {
 });
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  if ($("div").hasClass("animeImg")) {
+  let animeImages = document.querySelectorAll(".animeImg");
+  for (let i of animeImages) {
     getShowByID();
   }
 });
