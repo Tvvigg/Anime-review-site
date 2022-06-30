@@ -85,6 +85,7 @@ class Anime(db.Model):
     __tablename__ = "anime"
     name = db.Column(db.String, primary_key=True, nullable=False, unique=True)
     anime_DB_id = db.Column(db.Integer, nullable=False, unique=True)
+    reviews = db.relationship("Reviews", backref="anime")
 
 
 

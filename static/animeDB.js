@@ -68,7 +68,7 @@ $searchForm.on("submit", async function (evt) {
 });
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  if ($("div").hasClass("review")) {
+  if ($("div").hasClass("animeImg")) {
     getShowByID();
   }
 });

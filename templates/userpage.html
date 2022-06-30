@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% block title %} My Page {% endblock %} {% block
 content %} {% for review in reviews %}
-<div id="anime-image"></div>
+<div class="animeImg" id="anime-image"></div>
+<form>
+  <input type="hidden" id="animeId" value="{{review.anime_id.anime_DB_id}}" />
+</form>
+{% for anime in reviews.anime_id%} {{anime.anime_DB_id}} {% endfor %}
 <div>Anime name: {{review.anime_id}}</div>
 Rating: {{review.rating}} Comments: {{review.comments}} {% endfor %} {% endblock
 %}
