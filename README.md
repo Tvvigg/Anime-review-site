@@ -7,7 +7,7 @@ displays the description and image of any anime.
 
 ## Schema for the site:
 
-![Image](Schema.jpeg "Schema")
+![Image](Schema.png "Schema")
 
 ## Api used:
 
