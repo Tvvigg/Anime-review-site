@@ -9,6 +9,7 @@ from sqlalchemy import exists, and_
 from forms import RegisterForm, LoginForm, ReviewForm
 from models import db, connect_db, User, Anime, Reviews
 from secret import secret_key
+import logging
 
 app = Flask(__name__)
 
@@ -132,16 +133,19 @@ def reviews(animeName):
   
   animeId = Anime.query.filter_by(name = animeName).first().anime_DB_id
   if request.method == "POST":
-    rating=request.form.getlist("rate-area")
-    comments=request.form.getlist("comments")
-    print(rating)
-
+    rating=request.form.getlist("rating")[0]
+    comments=request.form.getlist("comments")[0]
+    
+    exist = Reviews.query.filter_by(user = session['username'], anime_id = animeName).first()
     review = Reviews(user=session['username'], anime_id=animeName, rating=rating, comments=comments)
-    db.session.add(review)
-    db.session.commit()
-
-    flash(f"Review was added for {animeName}!")
-    return redirect("/user")
+    if not exist:
+        db.session.add(review)
+        db.session.commit()
+        flash(f"Review was added for {animeName}!")
+        return redirect("/user")
+    else:
+        flash(f"Review already exists for {animeName}")
+        return redirect("/user")
 
   return render_template("/reviews.html", animeName=animeName, animeId=animeId)
 
