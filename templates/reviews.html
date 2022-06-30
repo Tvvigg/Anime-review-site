@@ -4,22 +4,42 @@
   <div class="review" id="anime-image"></div>
 
   <h1>New Review for {{animeName}}</h1>
-    
-    <form method="POST" class="form-inline" id="review-form">
-      <input type="hidden" id="animeId" value="{{animeId}}" />
-      <div class="rating">
-      <input name="stars" id="e5" type="radio" value=5></a><label for="e5">★</label>
-      <input name="stars" id="e4" type="radio" value=4></a><label for="e4">★</label>
-      <input name="stars" id="e3" type="radio" value=3></a><label for="e3">★</label>
-      <input name="stars" id="e2" type="radio" value=2></a><label for="e2">★</label>
-      <input name="stars" id="e1" type="radio" value=1></a><label for="e1">★</label>
-      </div>
-      <input name="comments" id="comments" type="text"><label for="comments">Comments:</label>
-      <button class="btn btn-primary">Submit</button>
-    </form>
 
-    
-    
+  <form method="POST" class="form-inline" id="review-form">
+    <input type="hidden" id="animeId" value="{{animeId}}" />
+    <ul class="rate-area">
+      <input type="radio" id="5-star" name="rating" value="5" /><label
+        for="5-star"
+        title="Amazing"
+        >5 stars</label
+      >
+      <input type="radio" id="4-star" name="rating" value="4" /><label
+        for="4-star"
+        title="Good"
+        >4 stars</label
+      >
+      <input type="radio" id="3-star" name="rating" value="3" /><label
+        for="3-star"
+        title="Average"
+        >3 stars</label
+      >
+      <input type="radio" id="2-star" name="rating" value="2" /><label
+        for="2-star"
+        title="Not Good"
+        >2 stars</label
+      >
+      <input type="radio" id="1-star" name="rating" value="1" /><label
+        for="1-star"
+        title="Bad"
+        >1 star</label
+      >
+    </ul>
+    <input name="comments" id="comments" type="text" /><label for="comments"
+      >Comments:</label
+    >
+    <button class="btn btn-primary">Submit</button>
+  </form>
+
   {% endblock %}
 </div>
 <script src="127.0.0.1:5000/static/animeDB.js"></script>

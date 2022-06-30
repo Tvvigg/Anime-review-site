@@ -132,7 +132,7 @@ def reviews(animeName):
   
   animeId = Anime.query.filter_by(name = animeName).first().anime_DB_id
   if request.method == "POST":
-    rating=request.form.getlist("rating")
+    rating=request.form.getlist("rate-area")
     comments=request.form.getlist("comments")
     print(rating)
 
