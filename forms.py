@@ -4,7 +4,6 @@ from tokenize import String
 from wtforms import StringField, PasswordField, SelectField, IntegerField, RadioField
 from wtforms.validators import InputRequired, Length, NumberRange, Email, Optional
 from flask_wtf import FlaskForm
-from wtforms_alchemy import model_form_factory
 from models import *
 
 

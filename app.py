@@ -6,7 +6,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import exists, and_
 
-from forms import RegisterForm, LoginForm, ReviewForm
+from forms import RegisterForm, LoginForm
 from models import db, connect_db, User, Anime, Reviews
 from secret import secret_key
 import logging
