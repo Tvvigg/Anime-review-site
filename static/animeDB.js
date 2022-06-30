@@ -27,9 +27,8 @@ async function getShowByID() {
   const response = await axios.get(
     `https://kitsu.io/api/edge/anime/${animeId}`
   );
-
-  img = response.data.data.attributes.coverImage;
-  const animeImg = $(`<img src="${img}" alt="image not found"/>`);
+  let img = response.data.data.attributes.coverImage;
+  const animeImg = $(`<img src="${img.tiny}" alt="image not found"/>`);
   $animeImage.append(animeImg);
 }
 
@@ -66,4 +65,10 @@ async function searchForShowAndDisplay() {
 $searchForm.on("submit", async function (evt) {
   evt.preventDefault();
   await searchForShowAndDisplay();
+});
+
+window.addEventListener("DOMContentLoaded", (e) => {
+  if ($("div").hasClass("review")) {
+    getShowByID();
+  }
 });

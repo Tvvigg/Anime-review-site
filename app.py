@@ -109,7 +109,7 @@ def animeList():
     anime = Anime(name = animeName[0], anime_DB_id = animeId[0])
     
     if "username" in session:
-        exist = db.session.query(exists().where(Anime.name == animeName[0]))
+        exist = db.session.query(db.exists().where(Anime.name == animeName[0])).scalar()
     
         if not exist:
             db.session.add(anime)
@@ -129,11 +129,12 @@ def animeList():
 @app.route("/review/<animeName>", methods=["GET", "POST"])
 def reviews(animeName):
   """Go to review page"""
-  form = ReviewForm()
-  animeId = Anime.query.filter_by(name = animeName).first()
-  if form.validate_on_submit():
-    rating = form.rating.data
-    comments = form.comments.data
+  
+  animeId = Anime.query.filter_by(name = animeName).first().anime_DB_id
+  if request.method == "POST":
+    rating=request.form.getlist("rating")
+    comments=request.form.getlist("comments")
+    print(rating)
 
     review = Reviews(user=session['username'], anime_id=animeName, rating=rating, comments=comments)
     db.session.add(review)
@@ -142,7 +143,7 @@ def reviews(animeName):
     flash(f"Review was added for {animeName}!")
     return redirect("/user")
 
-  return render_template("/reviews.html", animeName=animeName, animeId=animeId, form=form)
+  return render_template("/reviews.html", animeName=animeName, animeId=animeId)
 
 @app.after_request
 def add_header(req):
