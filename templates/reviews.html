@@ -1,8 +1,11 @@
 {% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
 
+<div id="anime-image"></div>
+
 <h1>New Review for {{animeName}}</h1>
 
 <form method="POST">
+  <input type="hidden" id="animeId" value="{{animeId}}" />
   {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
   'hidden'%}
 

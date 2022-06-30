@@ -130,6 +130,7 @@ def animeList():
 def reviews(animeName):
   """Go to review page"""
   form = ReviewForm()
+  animeId = Anime.query.filter_by(name = animeName).first()
   if form.validate_on_submit():
     rating = form.rating.data
     comments = form.comments.data
@@ -138,8 +139,10 @@ def reviews(animeName):
     db.session.add(review)
     db.session.commit()
 
+    flash(f"Review was added for {animeName}!")
     return redirect("/user")
-  return render_template("/reviews.html", animeName=animeName, form=form)
+
+  return render_template("/reviews.html", animeName=animeName, animeId=animeId, form=form)
 
 @app.after_request
 def add_header(req):

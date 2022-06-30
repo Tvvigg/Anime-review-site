@@ -37,7 +37,7 @@ class RegisterForm(FlaskForm):
 class ReviewForm(FlaskForm):
     """Review for Anime form."""
     
-    rating = RadioField("rating", choices=[('1', ""), ('2', ""), ('3',""), ('4', ""), ('5', "")], default = '1'
+    rating = RadioField("rating", choices=[('1', "★"), ('2', "★"), ('3',"★"), ('4', "★"), ('5', "★")], default = '1'
     )
     comments = StringField("Comments:")
 
