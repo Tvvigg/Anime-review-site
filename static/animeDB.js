@@ -21,15 +21,15 @@ async function getShowsByTerm(term) {
   }
 }
 
-async function getShowByID() {
+async function getShowByID(id, i) {
   //Get show by show id.
-  const animeId = $("#animeId").val();
-  const response = await axios.get(
-    `https://kitsu.io/api/edge/anime/${animeId}`
-  );
+  let animeDiv = document.getElementById(i);
+  console.log(animeDiv);
+  const response = await axios.get(`https://kitsu.io/api/edge/anime/${id}`);
   let img = response.data.data.attributes.coverImage;
-  const animeImg = $(`<img src="${img.tiny}" alt="image not found"/>`);
-  $animeImage.prepend(animeImg);
+  const animeImg = document.createElement("img");
+  animeImg.src = img.tiny;
+  animeDiv.after(animeImg);
 }
 
 /** Given list of shows, create markup for each and to DOM */
@@ -68,8 +68,12 @@ $searchForm.on("submit", async function (evt) {
 });
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  let animeImages = document.querySelectorAll(".animeImg");
-  for (let i of animeImages) {
-    getShowByID();
-  }
+  let animeImages = document.querySelectorAll("#animeId");
+  let i = 0;
+  animeImages.forEach((e) => {
+    e.id = i;
+    let id = e.value;
+    getShowByID(id, i);
+    i += 1;
+  });
 });

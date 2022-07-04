@@ -107,6 +107,7 @@ def animeList():
   if request.method == "POST":
     animeName = request.form.getlist("animeName")
     animeId = request.form.getlist("animeId")
+    animeImgSrc
     anime = Anime(name = animeName[0], anime_DB_id = animeId[0])
     
     if "username" in session:
