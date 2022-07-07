@@ -12,6 +12,8 @@ displays the description and image of any anime.
 ## Api used:
 
 https://kitsu.docs.apiary.io/
+https://kitsu.io/api/edge/anime?filter[text]={term}
+https://kitsu.io/api/edge/anime/{id}
 
 The main use of the API is to retrieve a list of anime based on a title search. The api also provides basic information about each anime, such as image and description.
 
